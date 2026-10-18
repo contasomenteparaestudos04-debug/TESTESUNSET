@@ -1,0 +1,25 @@
+# Teste da API pelo editor (alternativa à tela do Scalar, em /scalar).
+# Com a Api rodando, clique em "Enviar solicitação" (Visual Studio) ou
+# "Send Request" (VS Code com a extensão REST Client).
+# Antes, rode banco/dados_exemplo.sql para ter quadras, usuários e pagamentos.
+
+@Sunset.Api_HostAddress = http://localhost:5218
+
+### Lista as quadras (200)
+GET {{Sunset.Api_HostAddress}}/api/quadras
+
+### Uma quadra (200 ou 404)
+GET {{Sunset.Api_HostAddress}}/api/quadras/1
+
+### Agendar pela stored procedure (201; o mesmo pedido de novo dá 400: horário ocupado)
+POST {{Sunset.Api_HostAddress}}/api/agendamentos
+Content-Type: application/json
+
+{
+  "dataReserva": "2026-12-20",
+  "horaInicio": "18:00:00",
+  "horaFim": "19:00:00",
+  "usuarioId": 3,
+  "quadraId": 1,
+  "pagamentoId": 1
+}

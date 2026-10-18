@@ -1,0 +1,49 @@
+@model List<Sunset.Modelos.Dtos.UsuarioDto>
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<a asp-action="Index" class="small">&larr; Painel</a>
+<h1 class="h3 mt-2 mb-3">Usuários</h1>
+
+@if (TempData["Mensagem"] is string mensagem)
+{
+    <div class="alert alert-success">@mensagem</div>
+}
+@if (TempData["Erro"] is string erro)
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-12 col-sm-6 col-md-4">
+        <input type="text" name="busca" class="form-control" placeholder="Nome ou e-mail" value="@ViewData["Busca"]" />
+    </div>
+    <div class="col-auto"><button type="submit" class="btn btn-outline-primary">Buscar</button></div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.NomeSobrenome</td>
+                    <td>@u.Email</td>
+                    <td>@u.Permissao</td>
+                    <td class="text-end">
+                        @if (u.Permissao != "Admin")
+                        {
+                            <form asp-action="ExcluirUsuario" method="post" class="d-inline"
+                                  onsubmit="return confirm('Excluir este usuário?');">
+                                <input type="hidden" name="id" value="@u.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

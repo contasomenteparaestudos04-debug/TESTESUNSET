@@ -1,0 +1,51 @@
+@model Sunset.Modelos.Dtos.QuadraHorariosDto
+@{
+    ViewData["Title"] = "Horários";
+}
+
+<a asp-action="Index" asp-route-esporte="@Model.Quadra.Categoria" class="small">&larr; Voltar às quadras</a>
+<h1 class="h3 mt-2">@Model.Quadra.NomeQuadra</h1>
+<p class="text-muted">@Model.Quadra.Categoria &middot; @Model.Quadra.Endereco &middot; @Model.Quadra.PrecoHora.ToString("C2") por hora</p>
+
+@if (TempData["Erro"] is string erro)
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+<form method="get" class="row g-2 align-items-end mb-4">
+    <div class="col-auto">
+        <label for="data" class="form-label">Dia</label>
+        <input type="date" id="data" name="data" class="form-control"
+               value="@Model.Data.ToString("yyyy-MM-dd")" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary">Ver dia</button>
+    </div>
+</form>
+
+<h2 class="h5">@Model.Data.ToString("dddd, dd/MM/yyyy")</h2>
+
+<div class="row g-2">
+    @foreach (var h in Model.Horarios)
+    {
+        <div class="col-6 col-md-4 col-lg-3">
+            @if (h.Ocupado)
+            {
+                <button class="btn btn-secondary w-100" disabled>@h.Inicio - @h.Fim<br /><small>Ocupado</small></button>
+            }
+            else if (h.Passado)
+            {
+                <button class="btn btn-outline-secondary w-100" disabled>@h.Inicio - @h.Fim<br /><small>Encerrado</small></button>
+            }
+            else
+            {
+                <form asp-action="Reservar" method="post">
+                    <input type="hidden" name="quadraId" value="@Model.Quadra.Id" />
+                    <input type="hidden" name="data" value="@Model.Data.ToString("yyyy-MM-dd")" />
+                    <input type="hidden" name="hora" value="@h.Inicio" />
+                    <button type="submit" class="btn btn-success w-100">@h.Inicio - @h.Fim<br /><small>Livre</small></button>
+                </form>
+            }
+        </div>
+    }
+</div>

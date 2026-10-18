@@ -1,0 +1,60 @@
+@model List<Sunset.Modelos.Dtos.AgendamentoDto>
+@{
+    ViewData["Title"] = "Meus agendamentos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 m-0">Meus agendamentos</h1>
+    <a asp-action="Index" class="btn btn-primary">Novo agendamento</a>
+</div>
+
+@if (TempData["Mensagem"] is string mensagem)
+{
+    <div class="alert alert-success">@mensagem</div>
+}
+@if (TempData["Erro"] is string erro)
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Você ainda não tem agendamentos.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr><th>Quadra</th><th>Esporte</th><th>Dia</th><th>Horário</th><th>Status</th><th>Pagamento</th><th></th></tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.Quadra</td>
+                        <td>@a.Esporte</td>
+                        <td>@a.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@a.HoraInicio - @a.HoraFim</td>
+                        <td>@a.Status</td>
+                        <td>@a.StatusPagamento (@a.Valor.ToString("C2"))</td>
+                        <td class="text-end text-nowrap">
+                            @if (a.PodePagar)
+                            {
+                                <a asp-controller="Pagamentos" asp-action="Pix" asp-route-id="@a.PagamentoId" class="btn btn-sm btn-success">Pagar com Pix</a>
+                            }
+                            @if (a.PodeCancelar)
+                            {
+                                <form asp-action="Cancelar" method="post" class="d-inline"
+                                      onsubmit="return confirm('Cancelar este agendamento?');">
+                                    <input type="hidden" name="id" value="@a.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

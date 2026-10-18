@@ -1,0 +1,56 @@
+@model Sunset.Modelos.Dtos.PixDto
+@{
+    ViewData["Title"] = "Pagamento Pix";
+}
+
+<div class="cartao-centro text-center">
+    <h1 class="h3">Pagamento por Pix</h1>
+    <p class="text-muted mb-1">@Model.Quadra &middot; @Model.Data.ToString("dd/MM/yyyy") &middot; @Model.HoraInicio - @Model.HoraFim</p>
+    <p class="display-6 fw-bold">@Model.Valor.ToString("C2")</p>
+
+    @if (Model.StatusPagamento == "Pendente" && Model.SegundosRestantes > 0)
+    {
+        <img src="~/img/qrcode-exemplo.svg" alt="QR Code de exemplo" class="mb-2" />
+        <p class="small text-muted">QR Code de exemplo: este pagamento é uma simulação.</p>
+
+        <label class="form-label small mb-1">Pix copia e cola</label>
+        <input type="text" class="form-control text-center mb-3" value="@Model.Codigo" readonly />
+
+        <p>Tempo para pagar: <strong id="relogio" data-segundos="@Model.SegundosRestantes">--:--</strong></p>
+
+        <form asp-action="Simular" asp-route-id="@Model.PagamentoId" method="post">
+            <button type="submit" class="btn btn-success w-100">Simular pagamento</button>
+        </form>
+        <a asp-controller="Reservas" asp-action="Minhas" class="d-block mt-3 small">Pagar depois (o horário fica reservado até o fim do prazo)</a>
+    }
+    else if (Model.StatusPagamento == "Aprovado")
+    {
+        <div class="alert alert-success">Pagamento aprovado. Reserva confirmada!</div>
+        <a asp-controller="Reservas" asp-action="Minhas" class="btn btn-primary">Meus agendamentos</a>
+    }
+    else
+    {
+        <div class="alert alert-danger">O tempo do Pix acabou e a reserva foi cancelada.</div>
+        <a asp-controller="Reservas" asp-action="Index" class="btn btn-primary">Fazer nova reserva</a>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Relógio só visual: quando zera, recarrega a página e o servidor mostra a situação real.
+        var relogio = document.getElementById("relogio");
+        if (relogio) {
+            var restante = parseInt(relogio.dataset.segundos, 10);
+            function mostrar() {
+                var min = Math.floor(restante / 60), seg = restante % 60;
+                relogio.textContent = String(min).padStart(2, "0") + ":" + String(seg).padStart(2, "0");
+            }
+            mostrar();
+            var contagem = setInterval(function () {
+                restante--;
+                if (restante <= 0) { clearInterval(contagem); location.reload(); return; }
+                mostrar();
+            }, 1000);
+        }
+    </script>
+}

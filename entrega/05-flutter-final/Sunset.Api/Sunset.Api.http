@@ -1,0 +1,83 @@
+# Teste da API pelo editor (alternativa à tela do Scalar, em /scalar).
+# Com a Api rodando, clique em "Enviar solicitação" (Visual Studio) ou
+# "Send Request" (VS Code com a extensão REST Client).
+# Antes, rode banco/dados_exemplo.sql para ter quadras, usuários e pagamentos.
+
+@Sunset.Api_HostAddress = http://localhost:5218
+
+### Lista as quadras (200)
+GET {{Sunset.Api_HostAddress}}/api/quadras
+
+### Uma quadra (200 ou 404)
+GET {{Sunset.Api_HostAddress}}/api/quadras/1
+
+### Agendar pela stored procedure (201; o mesmo pedido de novo dá 400: horário ocupado)
+POST {{Sunset.Api_HostAddress}}/api/agendamentos
+Content-Type: application/json
+
+{
+  "dataReserva": "2026-12-20",
+  "horaInicio": "18:00:00",
+  "horaFim": "19:00:00",
+  "usuarioId": 3,
+  "quadraId": 1,
+  "pagamentoId": 1
+}
+
+### Cadastro de cliente (201; repetir o mesmo e-mail dá 400)
+POST {{Sunset.Api_HostAddress}}/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Carla",
+  "sobrenome": "Souza",
+  "email": "carla@teste.com",
+  "cpf": "529.982.247-25",
+  "senha": "Senha1234",
+  "confirmarSenha": "Senha1234"
+}
+
+### Login por e-mail (200; senha errada dá 401)
+POST {{Sunset.Api_HostAddress}}/api/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "carla@teste.com",
+  "senha": "Senha1234"
+}
+
+### Horários de uma quadra no dia (200)
+GET {{Sunset.Api_HostAddress}}/api/quadras/1/horarios?data=2026-12-20
+
+### Reservar 1 hora (cria o pagamento pendente e chama a procedure; 201, ou 400 se ocupado)
+POST {{Sunset.Api_HostAddress}}/api/agendamentos/reservar
+Content-Type: application/json
+
+{
+  "usuarioId": 3,
+  "quadraId": 1,
+  "data": "2026-12-21",
+  "horaInicio": "19:00:00"
+}
+
+### Meus agendamentos (200)
+GET {{Sunset.Api_HostAddress}}/api/agendamentos?usuarioId=3
+
+### Cancelar o agendamento 1 (204; só o cliente, o gestor da quadra ou o Admin)
+POST {{Sunset.Api_HostAddress}}/api/agendamentos/1/cancelar
+Content-Type: application/json
+
+{
+  "usuarioId": 3
+}
+
+### Dados do Pix do pagamento 1 (200; SegundosRestantes conta os 5 minutos)
+GET {{Sunset.Api_HostAddress}}/api/pagamentos/1/pix?usuarioId=3
+
+### Simular o pagamento (204; depois dos 5 minutos dá 400 e a reserva é cancelada)
+POST {{Sunset.Api_HostAddress}}/api/pagamentos/1/simular
+Content-Type: application/json
+
+{
+  "usuarioId": 3
+}

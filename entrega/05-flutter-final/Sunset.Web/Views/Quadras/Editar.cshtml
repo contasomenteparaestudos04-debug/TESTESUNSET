@@ -1,0 +1,12 @@
+@model Sunset.Modelos.Dtos.QuadraSalvarDto
+@{
+    ViewData["Title"] = "Editar quadra";
+}
+
+<h1 class="h3 mb-3">Editar quadra</h1>
+
+<form asp-action="Editar" asp-route-id="@ViewData["Id"]" method="post">
+    <partial name="_Formulario" model="Model" />
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-action="Index" class="btn btn-link">Cancelar</a>
+</form>

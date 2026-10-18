@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+.dart_tool/
+build/
+.idea/
+.flutter-plugins*
+.packages
+pubspec.lock

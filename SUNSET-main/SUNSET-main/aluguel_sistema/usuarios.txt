@@ -1,0 +1,7 @@
+1|maria|jose|123.456.789-00|maria@ma.com|senhaSegura123|Cliente|23/05/2026 00:59:00
+2||||||Cliente|23/05/2026 01:22:24
+3|Miguel|||||Cliente|23/05/2026 01:48:30
+4|mig|gue||||Cliente|23/05/2026 01:51:14
+5|mmg|geur|1213324354|||Cliente|23/05/2026 01:53:01
+6|mg|guy|123|mrifn@||Cliente|23/05/2026 01:54:02
+7|1|1|23|12@|1234|Cliente|23/05/2026 01:54:51

@@ -1,0 +1,65 @@
+@model List<Sunset.Modelos.Dtos.AgendamentoDto>
+@{
+    ViewData["Title"] = "Agendamentos";
+}
+
+<a asp-action="Index" class="small">&larr; Painel</a>
+<h1 class="h3 mt-2 mb-3">Agendamentos</h1>
+
+@if (TempData["Mensagem"] is string mensagem)
+{
+    <div class="alert alert-success">@mensagem</div>
+}
+@if (TempData["Erro"] is string erro)
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+<form method="get" class="row g-2 align-items-end mb-3">
+    <div class="col-12 col-md-4">
+        <label class="form-label small mb-1">Cliente ou quadra</label>
+        <input type="text" name="busca" class="form-control" value="@ViewData["Busca"]" />
+    </div>
+    <div class="col-6 col-md-2">
+        <label class="form-label small mb-1">De</label>
+        <input type="date" name="de" class="form-control" value="@ViewData["De"]" />
+    </div>
+    <div class="col-6 col-md-2">
+        <label class="form-label small mb-1">Até</label>
+        <input type="date" name="ate" class="form-control" value="@ViewData["Ate"]" />
+    </div>
+    <div class="col-auto"><button type="submit" class="btn btn-outline-primary">Filtrar</button></div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr><th>#</th><th>Cliente</th><th>Quadra</th><th>Dia</th><th>Horário</th><th>Status</th><th>Pagamento</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.Id</td>
+                    <td>@a.Cliente</td>
+                    <td>@a.Quadra</td>
+                    <td>@a.Data.ToString("dd/MM/yyyy")</td>
+                    <td>@a.HoraInicio - @a.HoraFim</td>
+                    <td>@a.Status</td>
+                    <td>@a.StatusPagamento</td>
+                    <td class="text-end">
+                        <form asp-action="ExcluirAgendamento" method="post" class="d-inline"
+                              onsubmit="return confirm('Excluir este agendamento? Não dá para desfazer.');">
+                            <input type="hidden" name="id" value="@a.Id" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Nenhum agendamento encontrado.</p>
+}

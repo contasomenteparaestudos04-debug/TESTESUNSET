@@ -1,0 +1,9 @@
+using system;
+
+public class Gestor : Usuario
+{
+  public override void MostrarPermissao()
+  {
+  Console.WriteLine("Permissao Gestor.")
+  }
+}

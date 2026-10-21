@@ -1,0 +1,20 @@
+# === BANCO DE DADOS ===
+*.sqlproj
+*.user
+*.db
+*.sqlite
+
+# === C# (SistemaLoginHash) ===
+**/bin/
+**/obj/
+**/.vs/
+*.userosscache
+*.sln.docstates
+
+# === FRONTEND (PIM-III---SUNSET) ===
+**/node_modules/
+**/dist/
+.env
+.env.local
+.DS_Store
+Thumbs.db

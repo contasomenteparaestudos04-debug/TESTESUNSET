@@ -14,7 +14,12 @@ Quarto incremento do PIM IV. Inclui tudo das Pastas 1, 2 e 3.
 - Usuários: busca por nome ou e-mail e exclusão. A exclusão usa `sp_set_session_context 'ExecutorID'` para a trigger `trg_ExclusaoSomenteAdmin` conferir se quem exclui é Admin (`UsuarioRepositorio.Excluir`).
 - Agendamentos: filtro por cliente/quadra e por período, e exclusão (apaga também o pagamento).
 - Quadras: o Admin vê e gerencia todas.
-- Relatório: botão que baixa `relatorio-sunset.txt` (usuários por perfil, quadras por esporte, agendamentos por status, faturamento dos pagamentos aprovados e lista de agendamentos). Código em `RelatorioNegocio.cs`.
+- Relatório do Admin: botão que baixa `relatorio-sunset.txt` (usuários por perfil, quadras por esporte, agendamentos por status, faturamento dos pagamentos aprovados e lista de agendamentos). Código em `RelatorioNegocio.Gerar`.
+
+**Relatório do gestor (`/Reservas/Relatorio`, perfil Gestor ou Admin)**
+- Na tela `Agenda`, o gestor escolhe um período (De / Até, opcional) e baixa `relatorio-quadras.txt` só com as quadras dele: agendamentos por status, faturamento dos pagamentos aprovados e a lista de agendamentos. Código em `RelatorioNegocio.GerarDoGestor`.
+- O relatório usa o id do usuário logado (`ReservasController.Relatorio`), então o gestor não consegue pedir dados de outra quadra pela URL. O Admin que abrir essa rota vê todas as quadras, igual à agenda.
+- Vem da documentação antiga: o gestor "gera relatórios" (CA2) e o relatório sai em TXT (RNF02). O "Exportar PDF" do fluxo 2.0.2 não foi feito.
 
 **Api**
 - `GET /api/pagamentos/{id}/pix?usuarioId=`
@@ -30,12 +35,14 @@ Igual às pastas anteriores.
 2. Clique em "Simular pagamento" e confira o status em `Meus agendamentos`.
 3. Faça outra reserva e espere 5 minutos sem pagar: a página recarrega e a reserva aparece cancelada.
 4. Entre com `admin@sunset.com` / `Admin@1234` e abra `Painel Admin`.
+5. Entre com `mariana.costa@hotmail.com` / `Senha1234` (gestora), abra `Agenda` e baixe o relatório das quadras dela, com e sem período.
 
 ## Arquivos principais para explicar
 
 - `Sunset.Negocio/AgendamentoNegocio.cs`: `ObterPix`, `SimularPagamento`, `ExpirarPagamentosVencidos`, `ExcluirComoAdmin`.
 - `Sunset.Repositorio/UsuarioRepositorio.cs`: `Excluir` com o contexto de sessão.
-- `Sunset.Negocio/RelatorioNegocio.cs`.
+- `Sunset.Negocio/RelatorioNegocio.cs` (`Gerar` e `GerarDoGestor`) e `AgendamentoRepositorio.ListarDasQuadras`.
+- `Sunset.Web/Controllers/ReservasController.cs` (`Relatorio`) e `Views/Reservas/Agenda.cshtml` (formulário do período).
 - `Sunset.Web/Controllers/PagamentosController.cs` e `Views/Pagamentos/Pix.cshtml` (relógio em JavaScript).
 - `Sunset.Web/Controllers/AdminController.cs` e `Views/Admin`.
 

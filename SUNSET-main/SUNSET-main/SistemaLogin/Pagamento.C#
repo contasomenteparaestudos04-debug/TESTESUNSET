@@ -1,0 +1,22 @@
+using System;
+
+public class Pagamento
+{
+    public double Valor { get; set; }
+
+    public DateTime DataCriacao { get; set; }
+
+    public void VerificarTempo()
+    {
+        TimeSpan tempo = DateTime.Now - DataCriacao;
+
+        if (tempo.TotalMinutes > 5)
+        {
+            Console.WriteLine("Pagamento expirado.");
+        }
+        else
+        {
+            Console.WriteLine("Pagamento dentro do prazo.");
+        }
+    }
+}

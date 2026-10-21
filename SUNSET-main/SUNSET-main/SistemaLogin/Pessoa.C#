@@ -1,0 +1,11 @@
+public class Pessoa  // cria classe pessoa de modo que pode acessar em outras classes
+{
+    public string Nome { get; set; }
+
+    public string CPF { get; set; }
+
+    public virtual void MostrarPermissao()
+    {
+        Console.WriteLine("Permissão padrão.");
+    }
+}

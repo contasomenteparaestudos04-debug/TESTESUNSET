@@ -1,0 +1,4 @@
+public class Usuario : Pessoa // Cria classe Usuario com a atributos da classe pessoa
+{
+    public string HashSenha { get; set; }
+}

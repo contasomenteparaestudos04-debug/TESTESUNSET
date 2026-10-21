@@ -108,20 +108,22 @@ Comandos para ter prontos antes de começar (Api na 5218, site na 5157): `dotnet
 
 ## 5. Pedro Henrique – Site MVC, agendamento e Pix (5 min)
 
-**Arquivos:** `Sunset.Web/Controllers/ContaController.cs`, `ReservasController.cs`, `PagamentosController.cs`, `Views/Reservas/Horarios.cshtml`, `Views/Pagamentos/Pix.cshtml`, `Views/Shared/_Layout.cshtml`, `Sunset.Negocio/AgendamentoNegocio.cs`.
+**Arquivos:** `Sunset.Web/Controllers/ContaController.cs`, `ReservasController.cs`, `PagamentosController.cs`, `Views/Reservas/Horarios.cshtml`, `Views/Pagamentos/Pix.cshtml`, `Views/Shared/_Layout.cshtml`, `Views/Reservas/Agenda.cshtml`, `Sunset.Negocio/AgendamentoNegocio.cs`.
 
 **Pontos-chave**
 - MVC: Controller recebe, chama o Negócio e devolve uma View Razor. Login por cookie; `[Authorize]` e `Roles` por perfil.
 - Fluxo do cliente: esporte → quadra → data → horário livre/ocupado → Pix → Meus agendamentos (demonstrar ao vivo).
 - `AgendamentoNegocio.Reservar`: valida horário (08–22h, 1h, até 60 dias, não passado), cria pagamento Pendente e chama a procedure.
 - Pix simulado: QR de exemplo, cronômetro de 5 minutos conferido no servidor (`ExpirarPagamentosVencidos`), botão "Simular pagamento" muda a reserva para Em andamento.
-- Cancelamento pelo cliente libera o horário. Gestor vê a agenda de 5 dias das quadras dele.
+- Cancelamento pelo cliente libera o horário. Gestor vê a agenda de 5 dias das quadras dele e baixa o relatório TXT delas, escolhendo o período (`ReservasController.Relatorio` e `RelatorioNegocio.GerarDoGestor`).
 - Visual: Bootstrap roxo, responsivo (mostrar com a janela estreita), VLibras no canto.
 
 **Perguntas prováveis**
 1. *O Pix é real?* Não, é simulado por decisão do grupo; a regra dos 5 minutos é real e conferida no servidor.
 2. *Por que conferir o prazo no servidor e não só na tela?* O cronômetro da tela pode ser alterado; o servidor é quem manda.
 3. *O que impede um cliente de cancelar a reserva de outro?* O Negócio compara o id do dono ou o gestor da quadra antes de cancelar.
+4. *Como garantem que o gestor só baixa o relatório das quadras dele?* A rota `Relatorio` exige perfil Gestor ou Admin e usa o id de quem está logado (guardado no cookie) para buscar só as quadras dele; não existe parâmetro de quadra na URL para trocar.
+5. *Por que o relatório é TXT e não PDF?* O requisito RNF02 da documentação pede TXT; o "Exportar PDF" que aparece em um fluxo antigo não foi implementado e está registrado no resumo dos tópicos alterados.
 4. *O que é `ValidateAntiForgeryToken`?* Protege os formulários contra envio falso de outro site.
 5. *Como o site fica responsivo?* Grid e componentes do Bootstrap e a tag viewport no `_Layout`.
 
@@ -136,7 +138,7 @@ Comandos para ter prontos antes de começar (Api na 5218, site na 5157): `dotnet
 **Pontos-chave**
 - API REST com os mesmos serviços de Negócio; endpoints de usuários, quadras, agendamentos e pagamentos (tabela na 2.6.7). Mostrar `/scalar` (documentação interativa).
 - App Flutter: `ServicoApi` (pacote `http`) e as telas login, quadras, horários, Pix e meus agendamentos. Mostrar rodando contra a Api.
-- Painel Admin: usuários, agendamentos com filtro por nome e data, exclusões (só Admin; a trigger confere) e relatório TXT (análise de dados simples).
+- Painel Admin: usuários, agendamentos com filtro por nome e data, exclusões (só Admin; a trigger confere) e relatório geral em TXT (análise de dados simples). O gestor tem o relatório só das quadras dele (explicado pelo Pedro Henrique).
 - Decisões: sem Machine Learning, Pix simulado.
 - Limitações honestas: Api sem token (o app manda o id do usuário); cancelamento de reserva paga sem estorno; agenda do gestor mostra como Livre horários de hoje que já passaram; app não testado no Android; `testes.sql` precisa de banco limpo.
 - Fechamento: o que o grupo aprendeu e próximos passos (token JWT, Pix real, sal no hash).
@@ -146,7 +148,7 @@ Comandos para ter prontos antes de começar (Api na 5218, site na 5157): `dotnet
 2. *O que é CORS e por que ligaram?* Permite que o app rodando em outro endereço do navegador chame a Api.
 3. *Por que o Flutter usa 10.0.2.2 no Android?* No emulador Android esse endereço aponta para o computador; `localhost` seria o próprio celular.
 4. *Por que não fizeram Machine Learning?* Decisão do grupo para entregar o restante bem testado; a análise de dados ficou no relatório TXT.
-5. *O que o relatório mostra?* Usuários por perfil, quadras por esporte, agendamentos por status, faturamento dos pagamentos aprovados e lista de agendamentos.
+5. *O que o relatório mostra?* Usuários por perfil, quadras por esporte, agendamentos por status, faturamento dos pagamentos aprovados e lista de agendamentos. O do gestor mostra o mesmo, mas só das quadras dele e no período escolhido.
 
 **Encerramento:** agradecer e abrir para perguntas, passando a palavra a quem for o assunto da pergunta.
 

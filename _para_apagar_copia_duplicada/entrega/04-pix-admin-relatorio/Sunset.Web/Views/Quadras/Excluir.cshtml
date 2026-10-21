@@ -1,0 +1,22 @@
+@model Sunset.Modelos.Dtos.QuadraDto
+@{
+    ViewData["Title"] = "Excluir quadra";
+}
+
+<h1 class="h3 mb-3">Excluir quadra</h1>
+
+<div class="alert alert-warning">Tem certeza que quer excluir esta quadra? O endereço dela também será apagado.</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Quadra</dt>
+    <dd class="col-sm-9">@Model.NomeQuadra</dd>
+    <dt class="col-sm-3">Esporte</dt>
+    <dd class="col-sm-9">@Model.Categoria</dd>
+    <dt class="col-sm-3">Endereço</dt>
+    <dd class="col-sm-9">@Model.Endereco</dd>
+</dl>
+
+<form asp-action="Excluir" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a asp-action="Index" class="btn btn-link">Voltar</a>
+</form>

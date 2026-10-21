@@ -1,0 +1,9 @@
+using system;
+
+public class Cliente : Usuario
+{
+  public override void MostrarPermissao()
+  {
+  Console.WriteLine("Permissao cliente.")
+  }
+}

@@ -108,6 +108,20 @@ public class AgendamentoRepositorio : IAgendamentoRepositorio
         return consulta.OrderByDescending(a => a.DataReserva).ThenBy(a => a.HoraInicio).ToList();
     }
 
+    public List<Agendamento> ListarDasQuadras(List<int> quadraIds, DateTime? de, DateTime? ate)
+    {
+        var consulta = _contexto.Agendamentos.AsNoTracking()
+            .Include(a => a.Quadra)
+            .Include(a => a.Usuario)
+            .Include(a => a.Pagamento)
+            .Where(a => quadraIds.Contains(a.QuadraId));
+
+        if (de.HasValue) consulta = consulta.Where(a => a.DataReserva >= de.Value.Date);
+        if (ate.HasValue) consulta = consulta.Where(a => a.DataReserva <= ate.Value.Date);
+
+        return consulta.OrderBy(a => a.DataReserva).ThenBy(a => a.HoraInicio).ToList();
+    }
+
     public void Remover(Agendamento agendamento)
     {
         _contexto.Agendamentos.Remove(agendamento);

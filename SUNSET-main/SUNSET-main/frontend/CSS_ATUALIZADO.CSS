@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+:root {
+    --background-color: #620d8a;
+    --text-color: #333333;
+    --white: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+}
+ 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #370444;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden; /* CORREÇÃO: impede scroll horizontal no body */
+}
+ 
+#container {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+ 
+#cadastro {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+ 
+#agendamento {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+ 
+#admin-panel {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    animation: fadeIn 0.5s ease;
+    overflow: hidden; /* CORREÇÃO: contém o conteúdo interno */
+    box-sizing: border-box;
+}
+ 
+.admin-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+ 
+.admin-controls input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.admin-controls button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* CORREÇÃO: wrapper para scroll horizontal da tabela */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block; /* garante comportamento de bloco */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    min-width: 480px; /* largura mínima antes de ativar o scroll */
+    table-layout: auto;
+}
+ 
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+ 
+th {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+ 
+button.delete-btn {
+    background: #dc3545;
+    color: var(--white);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+ 
+button.delete-btn:hover {
+    background: #c82333;
+}
+ 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+ 
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    font-weight: 400;
+}
+ 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+ 
+.input-group {
+    text-align: left;
+}
+ 
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+ 
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+ 
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--white);
+}
+ 
+.input-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+ 
+button {
+    background-color: green;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+ 
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+ 
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+ 
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+ 
+/* CORREÇÃO: responsividade para tablets */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    #admin-panel {
+        padding: 20px 12px;
+        margin: 10px auto;
+        border-radius: 8px;
+    }
+
+    #admin-panel h1 {
+        font-size: 1.5rem;
+        word-break: break-word;
+    }
+
+    .admin-controls {
+        flex-direction: column;
+    }
+
+    .admin-controls input,
+    .admin-controls button {
+        width: 100%;
+        min-width: unset;
+    }
+
+    th, td {
+        padding: 8px 6px;
+        font-size: 0.82rem;
+    }
+}
+
+/* CORREÇÃO: responsividade geral para telas pequenas */
+@media (max-width: 480px) {
+    #container {
+        padding: 20px;
+        margin: 20px;
+    }
+ 
+    h1 {
+        font-size: 2rem;
+    }
+ 
+    h2 {
+        font-size: 1rem;
+    }
+
+    #admin-panel {
+        padding: 14px 10px;
+        margin: 8px auto;
+    }
+}
+
+#confirmation {
+    display: none;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+ 
+#confirmation h2 {
+    margin-bottom: 20px;
+}
+ 
+.confirmation-details {
+    text-align: left;
+    margin: 20px 0;
+}
+ 
+.confirmation-details p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+ 
+.confirmation-details strong {
+    color: var(--primary-color);
+}

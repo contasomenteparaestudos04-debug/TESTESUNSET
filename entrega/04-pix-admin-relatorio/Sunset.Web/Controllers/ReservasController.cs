@@ -11,10 +11,12 @@ namespace Sunset.Web.Controllers;
 public class ReservasController : Controller
 {
     private readonly AgendamentoNegocio _negocio;
+    private readonly RelatorioNegocio _relatorio;
 
-    public ReservasController(AgendamentoNegocio negocio)
+    public ReservasController(AgendamentoNegocio negocio, RelatorioNegocio relatorio)
     {
         _negocio = negocio;
+        _relatorio = relatorio;
     }
 
     // GET /Reservas?esporte=Volei   -> quadras do esporte, livres ou ocupadas agora
@@ -77,4 +79,19 @@ public class ReservasController : Controller
     // GET /Reservas/Agenda   -> próximos 5 dias das quadras do gestor
     [Authorize(Roles = "Gestor,Admin")]
     public IActionResult Agenda() => View(_negocio.AgendaDoGestor(User.Id(), User.Perfil()));
+
+    // GET /Reservas/Relatorio?de=2026-10-01&ate=2026-10-31   -> baixa o relatorio-quadras.txt
+    // O relatório usa o id do usuário logado, então o gestor só recebe as quadras dele.
+    [Authorize(Roles = "Gestor,Admin")]
+    public IActionResult Relatorio(DateTime? de, DateTime? ate)
+    {
+        if (de.HasValue && ate.HasValue && ate.Value < de.Value)
+        {
+            TempData["Erro"] = "A data final não pode ser antes da data inicial.";
+            return RedirectToAction(nameof(Agenda));
+        }
+
+        var texto = _relatorio.GerarDoGestor(User.Id(), User.Perfil(), de, ate);
+        return File(System.Text.Encoding.UTF8.GetBytes(texto), "text/plain; charset=utf-8", "relatorio-quadras.txt");
+    }
 }

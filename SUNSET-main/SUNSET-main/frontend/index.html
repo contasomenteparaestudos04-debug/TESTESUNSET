@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS_ATUALIZADO.CSS">
+    <title>SUNSET</title>
+</head>
+<body>
+    <div id="container">
+        <h1>SUNSET</h1>
+        <h2>Facilite seu agendamento com praticidade!</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="usuario">Usuário</label>
+                <input type="text" id="usuario" name="usuario" required>
+            </div>
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="admin-checkbox" name="admin-checkbox" style="width: 16px; height: 16px; margin: 0; cursor: pointer;">
+            <label for="admin-checkbox" style="margin: 0; font-weight: 600; color: var(--text-color); cursor: pointer;">Sou administrador</label>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <p><a href="#" id="criar-conta">Criar conta</a></p>
+    </div>
+
+    <div id="cadastro" style="display: none;">
+        <h1>SUNSET</h1>
+        <h2>Cadastre-se para agendar!</h2>
+        <form id="cadastro-form">
+            <div class="input-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="usuario-cad">Usuário</label>
+                <input type="text" id="usuario-cad" name="usuario" required>
+            </div>
+            <div class="input-group">
+                <label for="senha-cad">Senha</label>
+                <input type="password" id="senha-cad" name="senha" required>
+            </div>
+            <div class="input-group">
+                <label for="confirmar-senha">Confirmar senha</label>
+                <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p><a href="#" id="voltar-login">Voltar ao login</a></p>
+    </div>
+
+    <div id="agendamento" style="display: none;">
+        <h1>SUNSET</h1>
+        <h2>Faça seu agendamento!</h2>
+        <form id="agendamento-form">
+            <div class="input-group">
+                <label for="esporte-select">Esporte</label>
+                <select id="esporte-select" name="esporte" required>
+                    <option value="">Selecione um esporte</option>
+                    <option value="Beach Tennis">Beach Tennis</option>
+                    <option value="Vôlei">Vôlei</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="quadra-select">Quadra</label>
+                <select id="quadra-select" name="quadra" required>
+                    <option value="">Selecione uma quadra</option>
+                    <option value="Quadra 1">Quadra 1</option>
+                    <option value="Quadra 2">Quadra 2</option>
+                    <option value="Quadra 3">Quadra 3</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="data-select">Data</label>
+                <input type="date" id="data-select" name="data" required>
+            </div>
+            <div class="input-group">
+                <label for="horario-select">Horário</label>
+                <select id="horario-select" name="horario" required>
+                    <option value="">Selecione um horário</option>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                </select>
+            </div>
+            <button type="submit">Confirmar Agendamento</button>
+        </form>
+        <p><a href="#" id="voltar-login-agendamento">Voltar ao login</a></p>
+    </div>
+
+    <div id="confirmation">
+        <h2>Confirmação do Agendamento</h2>
+        <div class="confirmation-details">
+            <p><strong>Nome do cliente:</strong> <span id="cliente-nome"></span></p>
+            <p><strong>Esporte:</strong> <span id="esporte"></span></p>
+            <p><strong>Quadra:</strong> <span id="quadra"></span></p>
+            <p><strong>Data:</strong> <span id="data"></span></p>
+            <p><strong>Horário:</strong> <span id="horario"></span></p>
+        </div>
+        <button onclick="irParaLogin()">Voltar</button>
+    </div>
+
+    <div id="admin-panel" style="display: none;">
+        <h1>Painel Administrativo - SUNSET</h1>
+        <div class="admin-controls">
+            <input type="text" id="search-input" placeholder="Pesquisar por nome...">
+            <input type="date" id="filter-date">
+            <button onclick="aplicarFiltros()">Filtrar</button>
+        </div>
+        <table id="agendamentos-table">
+            <thead>
+                <tr>
+                    <th>Nome do Cliente</th>
+                    <th>Esporte</th>
+                    <th>Quadra</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+        <button onclick="irParaLogin()">Voltar ao Login</button>
+    </div>
+
+    <div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+     </div>
+     </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script>
+        let nomeUsuario = 'João Silva';
+        let listaAgendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+
+        function abrirTelaCadastro() {
+            document.getElementById('container').style.display = 'none';
+            document.getElementById('cadastro').style.display = 'block';
+        }
+
+        function irParaLogin() {
+            document.getElementById('cadastro').style.display = 'none';
+            document.getElementById('agendamento').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('container').style.display = 'block';
+        }
+
+        function abrirTelaAgendamento() {
+            document.getElementById('container').style.display = 'none';
+            document.getElementById('agendamento').style.display = 'block';
+        }
+
+        function abrirPainelAdmin() {
+            document.getElementById('container').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            renderizarTabela();
+        }
+
+        function exibirConfirmacao(esporte, quadra, data, horario) {
+            document.getElementById('agendamento').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+            document.getElementById('cliente-nome').textContent = nomeUsuario;
+            document.getElementById('esporte').textContent = esporte;
+            document.getElementById('quadra').textContent = quadra;
+            document.getElementById('data').textContent = data;
+            document.getElementById('horario').textContent = horario;
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ehAdmin = document.getElementById('admin-checkbox').checked;
+            alert('Login realizado com sucesso!');
+            if (ehAdmin) {
+                abrirPainelAdmin();
+            } else {
+                abrirTelaAgendamento();
+            }
+        });
+
+        document.getElementById('criar-conta').addEventListener('click', function(e) {
+            e.preventDefault();
+            abrirTelaCadastro();
+        });
+
+        document.getElementById('voltar-login').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaLogin();
+        });
+
+        document.getElementById('voltar-login-agendamento').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaLogin();
+        });
+
+        document.getElementById('cadastro-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const senha = document.getElementById('senha-cad').value;
+            const confirmacao = document.getElementById('confirmar-senha').value;
+
+            if (senha !== confirmacao) {
+                alert('As senhas não coincidem. Tente novamente.');
+                return;
+            }
+
+            nomeUsuario = nome;
+            alert('Cadastro realizado com sucesso!');
+            irParaLogin();
+        });
+
+        document.getElementById('agendamento-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const esporte = document.getElementById('esporte-select').value;
+            const quadra = document.getElementById('quadra-select').value;
+            const data = document.getElementById('data-select').value;
+            const horario = document.getElementById('horario-select').value;
+
+            if (!esporte || !quadra || !data || !horario) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const novoAgendamento = {
+                nome: nomeUsuario,
+                esporte,
+                quadra,
+                data,
+                horario,
+                id: Date.now()
+            };
+
+            listaAgendamentos.push(novoAgendamento);
+            localStorage.setItem('agendamentos', JSON.stringify(listaAgendamentos));
+            exibirConfirmacao(esporte, quadra, data, horario);
+        });
+
+        function renderizarTabela(filtroData = '', termoBusca = '') {
+            const corpo = document.getElementById('table-body');
+            corpo.innerHTML = '';
+
+            let resultado = listaAgendamentos;
+
+            if (filtroData) {
+                resultado = resultado.filter(a => a.data === filtroData);
+            }
+
+            if (termoBusca) {
+                resultado = resultado.filter(a => a.nome.toLowerCase().includes(termoBusca.toLowerCase()));
+            }
+
+            resultado.forEach(agendamento => {
+                const linha = document.createElement('tr');
+                linha.innerHTML = `
+                    <td>${agendamento.nome}</td>
+                    <td>${agendamento.esporte}</td>
+                    <td>${agendamento.quadra}</td>
+                    <td>${agendamento.data}</td>
+                    <td>${agendamento.horario}</td>
+                    <td><button class="delete-btn" onclick="removerAgendamento(${agendamento.id})">Excluir</button></td>
+                `;
+                corpo.appendChild(linha);
+            });
+        }
+
+        function aplicarFiltros() {
+            const termoBusca = document.getElementById('search-input').value;
+            const filtroData = document.getElementById('filter-date').value;
+            renderizarTabela(filtroData, termoBusca);
+        }
+
+        function removerAgendamento(id) {
+            listaAgendamentos = listaAgendamentos.filter(a => a.id !== id);
+            localStorage.setItem('agendamentos', JSON.stringify(listaAgendamentos));
+            renderizarTabela();
+        }
+    </script>
+</body>
+</html>

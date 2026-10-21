@@ -1,0 +1,12 @@
+@model Sunset.Modelos.Dtos.QuadraSalvarDto
+@{
+    ViewData["Title"] = "Nova quadra";
+}
+
+<h1 class="h3 mb-3">Nova quadra</h1>
+
+<form asp-action="Criar" method="post">
+    <partial name="_Formulario" model="Model" />
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-action="Index" class="btn btn-link">Cancelar</a>
+</form>

@@ -1,0 +1,41 @@
+using System;
+
+public class Sistema
+{
+    public void Executar()
+    {
+        Cliente cliente = new Cliente();
+
+        cliente.Nome = "Joao";
+        cliente.CPF = "12345678911";
+
+        Validacao validacao = new Validacao();
+
+        bool cpfValido = validacao.ValidarCPF(cliente.CPF);
+
+        if (cpfValido == false)
+        {
+            Console.WriteLine("CPF inválido!");
+            return;
+        }
+
+        Console.Write("Digite a senha: ");
+        string senha = Console.ReadLine();
+
+        Seguranca seguranca = new Seguranca();
+
+        cliente.HashSenha = seguranca.GerarHash(senha);
+
+        Console.WriteLine("\nHASH da senha:");
+        Console.WriteLine(cliente.HashSenha);
+
+        cliente.MostrarPermissao();
+
+        Pagamento pagamento = new Pagamento();
+
+        pagamento.Valor = 150;
+        pagamento.DataCriacao = DateTime.Now;
+
+        pagamento.VerificarTempo();
+    }
+}

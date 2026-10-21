@@ -17,6 +17,8 @@ public interface IAgendamentoRepositorio
     List<Agendamento> ListarPendentesVencidos(DateTime limite);
     // Para o painel do Admin: busca por nome (cliente ou quadra) e período.
     List<Agendamento> ListarTodos(string? busca, DateTime? de, DateTime? ate);
+    // Para o relatório do gestor: só os agendamentos das quadras informadas, dentro do período.
+    List<Agendamento> ListarDasQuadras(List<int> quadraIds, DateTime? de, DateTime? ate);
     void Atualizar(Agendamento agendamento);
     void Remover(Agendamento agendamento);
 }

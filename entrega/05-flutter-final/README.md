@@ -5,6 +5,7 @@ Quinto e último incremento do PIM IV. Inclui tudo das Pastas 1 a 4 e adiciona o
 ## O que foi entregue
 
 - `sunset_app/`: aplicativo Flutter que **consome a Web API** (login por e-mail, quadras e horários, reserva, Pix simulado e **Meus agendamentos** com cancelamento, que é a funcionalidade complementar). Detalhes no `sunset_app/README.md`.
+- O site traz também o relatório TXT do gestor (tela `Agenda`), vindo da Pasta 4.
 - CORS liberado na Api (`Sunset.Api/Program.cs`) para o app rodando no navegador chamar a Api.
 - Documentação final e roteiros de apresentação (ficam na pasta `docs/` do projeto, fora das pastas de código).
 

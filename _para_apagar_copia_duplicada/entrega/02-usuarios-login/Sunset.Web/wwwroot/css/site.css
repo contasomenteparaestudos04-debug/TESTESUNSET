@@ -1,0 +1,80 @@
+/* Visual do SUNSET: roxo como cor principal (como na documentação do front). */
+:root {
+  --sunset-roxo: #620d8a;
+  --sunset-roxo-escuro: #370444;
+  --bs-primary: #620d8a;
+  --bs-link-color: #620d8a;
+}
+
+html {
+  font-size: 15px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #f6f3f8;
+}
+
+.sunset-nav {
+  background-color: var(--sunset-roxo-escuro);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--sunset-roxo);
+  --bs-btn-border-color: var(--sunset-roxo);
+  --bs-btn-hover-bg: #4b0a69;
+  --bs-btn-hover-border-color: #4b0a69;
+  --bs-btn-active-bg: #4b0a69;
+  --bs-btn-active-border-color: #4b0a69;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--sunset-roxo);
+  --bs-btn-border-color: var(--sunset-roxo);
+  --bs-btn-hover-bg: var(--sunset-roxo);
+  --bs-btn-hover-border-color: var(--sunset-roxo);
+  --bs-btn-active-bg: var(--sunset-roxo);
+  --bs-btn-active-border-color: var(--sunset-roxo);
+}
+
+.btn:focus, .btn:active:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(98, 13, 138, 0.25);
+  border-color: var(--sunset-roxo);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--sunset-roxo-escuro), var(--sunset-roxo));
+  color: #fff;
+  border-radius: 12px;
+  padding: 3rem 1.5rem;
+}
+
+.table-responsive {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Cartão central usado nas telas de login e cadastro */
+.cartao-centro {
+    max-width: 520px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+}

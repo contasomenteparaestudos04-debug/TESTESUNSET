@@ -1,0 +1,55 @@
+@model List<Sunset.Modelos.Dtos.QuadraStatusDto>
+@{
+    ViewData["Title"] = "Agendar";
+    var esporte = (string)ViewData["Esporte"]!;
+}
+
+<h1 class="h3 mb-3">Agendar quadra</h1>
+
+@* Abas por esporte *@
+<ul class="nav nav-pills mb-4">
+    @foreach (var e in Sunset.Modelos.Categorias.Todas)
+    {
+        <li class="nav-item">
+            <a class="nav-link @(e == esporte ? "active" : "")" asp-action="Index" asp-route-esporte="@e">@e</a>
+        </li>
+    }
+</ul>
+
+@if (TempData["Mensagem"] is string mensagem)
+{
+    <div class="alert alert-success">@mensagem</div>
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Nenhuma quadra de @esporte cadastrada ainda.</p>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h2 class="h5">@item.Quadra.NomeQuadra</h2>
+                            @if (item.LivreAgora)
+                            {
+                                <span class="badge text-bg-success">Livre agora</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">Ocupada agora</span>
+                            }
+                        </div>
+                        <p class="text-muted small mb-2">@item.Quadra.Endereco</p>
+                        <p class="fw-bold mb-3">@item.Quadra.PrecoHora.ToString("C2") por hora</p>
+                        <a asp-action="Horarios" asp-route-id="@item.Quadra.Id" class="btn btn-primary w-100">Ver horários</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

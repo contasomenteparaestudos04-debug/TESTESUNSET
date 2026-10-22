@@ -25,7 +25,7 @@ else
 {
     @* table-responsive: no celular a tabela rola de lado em vez de estourar a tela *@
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle tabela-celular">
             <thead>
                 <tr>
                     <th>Quadra</th>
@@ -39,10 +39,10 @@ else
                 @foreach (var q in Model)
                 {
                     <tr>
-                        <td>@q.NomeQuadra</td>
-                        <td>@q.Categoria</td>
-                        <td>@q.PrecoHora.ToString("C2")</td>
-                        <td>@q.Endereco</td>
+                        <td data-label="Quadra">@q.NomeQuadra</td>
+                        <td data-label="Esporte">@q.Categoria</td>
+                        <td data-label="Preço/hora">@q.PrecoHora.ToString("C2")</td>
+                        <td data-label="Endereço">@q.Endereco</td>
                         <td class="text-end text-nowrap">
                             <a asp-action="Editar" asp-route-id="@q.Id" class="btn btn-sm btn-outline-primary">Editar</a>
                             <a asp-action="Excluir" asp-route-id="@q.Id" class="btn btn-sm btn-outline-danger">Excluir</a>

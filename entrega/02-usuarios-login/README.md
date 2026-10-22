@@ -45,3 +45,7 @@ Pasta 3: agendamento pelo cliente, cancelamento, tela do gestor com os próximos
 - A Api não usa token: o login só devolve os dados do usuário. Na Pasta 3 em diante o app envia o id do usuário, então ele pode ser forjado. É uma simplificação assumida para o PIM.
 - SHA256 sem sal, como pede a documentação do semestre anterior.
 - Editar e excluir quadra ainda não conferem se a quadra é do gestor logado (chega na Pasta 3).
+
+## Responsividade no celular
+
+Nas telas `Minhas quadras`, a tabela vira uma lista de cartões quando a tela tem menos de 768px (antes ela rolava para o lado e escondia colunas e botões). A regra está no final de `Sunset.Web/wwwroot/css/site.css` (`.tabela-celular`) e cada `<td>` das views tem um `data-label` com o nome da coluna. Em tela larga nada mudou.

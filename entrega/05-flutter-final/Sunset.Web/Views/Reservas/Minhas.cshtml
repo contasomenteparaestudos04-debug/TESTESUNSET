@@ -24,7 +24,7 @@
 else
 {
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle tabela-celular">
             <thead>
                 <tr><th>Quadra</th><th>Esporte</th><th>Dia</th><th>Horário</th><th>Status</th><th>Pagamento</th><th></th></tr>
             </thead>
@@ -32,12 +32,12 @@ else
                 @foreach (var a in Model)
                 {
                     <tr>
-                        <td>@a.Quadra</td>
-                        <td>@a.Esporte</td>
-                        <td>@a.Data.ToString("dd/MM/yyyy")</td>
-                        <td>@a.HoraInicio - @a.HoraFim</td>
-                        <td>@a.Status</td>
-                        <td>@a.StatusPagamento (@a.Valor.ToString("C2"))</td>
+                        <td data-label="Quadra">@a.Quadra</td>
+                        <td data-label="Esporte">@a.Esporte</td>
+                        <td data-label="Dia">@a.Data.ToString("dd/MM/yyyy")</td>
+                        <td data-label="Horário">@a.HoraInicio - @a.HoraFim</td>
+                        <td data-label="Status">@a.Status</td>
+                        <td data-label="Pagamento">@a.StatusPagamento (@a.Valor.ToString("C2"))</td>
                         <td class="text-end text-nowrap">
                             @if (a.PodePagar)
                             {

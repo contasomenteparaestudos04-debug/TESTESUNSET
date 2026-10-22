@@ -35,3 +35,7 @@ Quinto e último incremento do PIM IV. Inclui tudo das Pastas 1 a 4 e adiciona o
 - O app só tem o perfil de cliente: não cadastra usuário nem tem painel de gestor/Admin (isso fica no site).
 - Sem token: o app guarda o id do usuário depois do login (simplificação do PIM).
 - O QR Code do app é um ícone; o do site é uma imagem de exemplo. Os dois são simulação.
+
+## Responsividade no celular
+
+Nas telas `Minhas quadras`, `Meus agendamentos`, `Admin > Usuarios` e `Admin > Agendamentos`, a tabela vira uma lista de cartões quando a tela tem menos de 768px (antes ela rolava para o lado e escondia colunas e botões). A regra está no final de `Sunset.Web/wwwroot/css/site.css` (`.tabela-celular`) e cada `<td>` das views tem um `data-label` com o nome da coluna. Em tela larga nada mudou.

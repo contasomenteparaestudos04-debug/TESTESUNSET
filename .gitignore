@@ -8,3 +8,5 @@ build/
 .flutter-plugins*
 .packages
 pubspec.lock
+# pastas temporarias que nao sobem
+_para_apagar*

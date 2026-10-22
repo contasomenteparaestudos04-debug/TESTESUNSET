@@ -1,4 +1,4 @@
-# Resultados dos testes – SUNSET (18/10/2026)
+# Resultados dos testes – SUNSET (atualizado em 21/10/2026)
 
 Resumo do que foi testado no computador do grupo (SQL Server 2022 Express, instância SQLEXPRESS).
 
@@ -10,8 +10,10 @@ Resumo do que foi testado no computador do grupo (SQL Server 2022 Express, inst�
 | Api | Chamadas reais contra o SQL Server (login, quadras, horários, reserva, Pix, cancelamento) | Passou |
 | Site | Navegador, perfis Cliente, Gestor e Admin | Passou |
 | Relatório do gestor (19/10) | Programa de teste local com repositórios de mentira: só as quadras do gestor, filtro de período, Admin vê todas, gestor sem quadra | Passou (7 testes novos). Compilou sem erros nas Pastas 4 e 5 |
+| Relatório TXT na tela (21/10) | Site rodando no GitHub Codespaces (cópia igual à Pasta 5), com SQL Server: pagamento de uma reserva, botão de baixar o relatório e perfis de gestor diferentes | Passou: o relatório atualizou com o pagamento e cada gestor vê só as quadras dele |
+| Exclusão de usuário pelo painel Admin (21/10) | Codespaces com SQL Server: excluir usuário com agendamentos e excluir usuário sem vínculos | Passou: o com vínculos foi recusado com mensagem e continuou na lista; o sem vínculos foi excluído |
 | App Flutter | Chrome contra a Api real; `flutter analyze` e `flutter test` | Passou; bug de `setState` achado e corrigido |
 
-Não testado: app no Android; botão "Baixar TXT" (Admin) e o formulário de período do relatório do gestor na tela; exclusão de usuário com agendamentos pela tela do Admin.
+Não testado: app no Android (sem Android SDK no computador usado; foi testado no navegador).
 Observação: rodar `testes.sql` uma segunda vez dá falhas nos testes 1, 2 e 10 porque os dados já existem (esperado). Use banco limpo.
 Prints dos testes: o grupo deve colocar na documentação (marcação PRINT 6).

@@ -263,7 +263,7 @@ m.tabela(['O que foi testado', 'Como', 'Resultado', 'Situação'],
   ['Regras de negócio', 'Programa de teste local com repositórios de mentira', 'Cadastro, CPF, senha, login, reserva, conflito, cancelamento, Pix e expiração', 'Passou'],
   ['Api', 'Chamadas reais contra o SQL Server', 'Login, reserva, Pix e cancelamento', 'Passou'],
   ['Site', 'Navegador, perfis Cliente, Gestor e Admin', 'Telas e fluxos principais', 'Passou'],
-  ['Relatório do gestor', 'Programa de teste local com repositórios de mentira', 'Gestor só recebe as quadras dele, filtro de período, Admin vê todas, gestor sem quadra recebe relatório vazio', 'Passou (botão na tela ainda deve ser conferido pelo grupo)'],
+  ['Relatório do gestor', 'Programa de teste local com repositórios de mentira', 'Gestor só recebe as quadras dele, filtro de período, Admin vê todas, gestor sem quadra recebe relatório vazio', 'Passou (botão de baixar o TXT e relatório do gestor conferidos na tela em 21/10/2026, no Codespaces)'],
   ['Aplicativo Flutter', 'Chrome contra a Api real; flutter analyze e flutter test', 'Fluxo completo; 1 erro de setState achado e corrigido', 'Passou (Android não testado)']],
  'Tabela – Testes. Fonte: os autores (2026).')
 m.marcador('[PRINT 6 – Resultado do banco/testes.sql no SSMS]')
@@ -283,7 +283,6 @@ m.lista(['A Api não tem token; o app manda o id do usuário (seção 2.6.7).',
          'Na agenda do gestor, horários de hoje que já passaram aparecem como Livre.',
          'Não há Machine Learning (decisão do grupo); a análise de dados é o relatório TXT.',
          'O aplicativo não foi testado no Android (sem Android SDK no computador usado); foi testado no navegador.',
-         'Os botões de baixar o relatório TXT (Admin e gestor) e a mensagem ao tentar excluir um usuário que tem agendamentos ainda precisam ser conferidos na tela pelo grupo.',
          'banco/testes.sql não pode ser rodado duas vezes seguidas: precisa de um banco limpo.',
          'A documentação antiga tem mais páginas que o limite de 20 a 30 páginas do manual; o grupo deve decidir o que enxugar.'])
 

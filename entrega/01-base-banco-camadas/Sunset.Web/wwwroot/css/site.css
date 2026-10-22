@@ -68,3 +68,48 @@ body {
   bottom: 0;
   width: 100%;
 }
+
+/* Celular: cada linha da tabela vira um cartao, com o nome da coluna antes do valor.
+   O nome vem do atributo data-label de cada <td> (ver as views com a classe tabela-celular). */
+@media (max-width: 767.98px) {
+  .table-responsive:has(.tabela-celular) {
+    background: transparent;
+    padding: 0;
+  }
+  .tabela-celular thead {
+    display: none;
+  }
+  .tabela-celular, .tabela-celular tbody, .tabela-celular tr, .tabela-celular td {
+    display: block;
+    width: 100%;
+  }
+  .tabela-celular tr {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0.75rem;
+  }
+  .tabela-celular > :not(caption) > * > * {
+    background: transparent;
+    box-shadow: none;
+  }
+  .tabela-celular td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 0;
+    padding: 0.35rem 0;
+    text-align: right;
+  }
+  .tabela-celular td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-align: left;
+  }
+  /* celula dos botoes (sem rotulo): botoes alinhados a direita */
+  .tabela-celular td:not([data-label]) {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}

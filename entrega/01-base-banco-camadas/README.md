@@ -49,3 +49,7 @@ Pasta 2: cadastro de usuário, login por e-mail, perfis Admin, Gestor e Cliente.
 
 - O código compila e a Web/Api sobem, mas o banco (migration, triggers, procedure) **não foi executado num SQL Server real** por quem montou esta pasta. Rode `banco/testes.sql` e confira o resultado esperado de cada teste.
 - O `INJECAO-DE-DEPENDENCIA.md` é o guia do professor e ainda usa `Cliente` nos exemplos.
+
+## Responsividade no celular
+
+Nas telas `Minhas quadras`, a tabela vira uma lista de cartões quando a tela tem menos de 768px (antes ela rolava para o lado e escondia colunas e botões). A regra está no final de `Sunset.Web/wwwroot/css/site.css` (`.tabela-celular`) e cada `<td>` das views tem um `data-label` com o nome da coluna. Em tela larga nada mudou.

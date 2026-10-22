@@ -61,3 +61,7 @@ Pasta 4: pagamento por Pix simulado, painel do administrador e relatório em TXT
 - Reserva de 1 hora por vez, em horários cheios (simplificação).
 - Devolução de dinheiro de pagamento aprovado não está no escopo.
 - A Api não valida token: o `usuarioId` enviado é confiado (simplificação assumida).
+
+## Responsividade no celular
+
+Nas telas `Minhas quadras` e `Meus agendamentos`, a tabela vira uma lista de cartões quando a tela tem menos de 768px (antes ela rolava para o lado e escondia colunas e botões). A regra está no final de `Sunset.Web/wwwroot/css/site.css` (`.tabela-celular`) e cada `<td>` das views tem um `data-label` com o nome da coluna. Em tela larga nada mudou.

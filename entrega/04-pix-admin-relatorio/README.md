@@ -62,3 +62,7 @@ Pasta 5: aplicativo Flutter (consome a Api) e fechamento do projeto.
 - Usuário que já tem agendamentos, pagamentos ou quadras não pode ser excluído (o banco recusa por causa das chaves estrangeiras) e o painel mostra a mensagem.
 - A expiração acontece quando alguém consulta horários ou reservas, não por um serviço rodando em segundo plano (mais simples).
 - Devolução de dinheiro continua fora do escopo.
+
+## Responsividade no celular
+
+Nas telas `Minhas quadras`, `Meus agendamentos`, `Admin > Usuarios` e `Admin > Agendamentos`, a tabela vira uma lista de cartões quando a tela tem menos de 768px (antes ela rolava para o lado e escondia colunas e botões). A regra está no final de `Sunset.Web/wwwroot/css/site.css` (`.tabela-celular`) e cada `<td>` das views tem um `data-label` com o nome da coluna. Em tela larga nada mudou.

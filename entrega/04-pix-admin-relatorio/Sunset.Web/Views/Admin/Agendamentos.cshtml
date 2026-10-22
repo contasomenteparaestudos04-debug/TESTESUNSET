@@ -32,7 +32,7 @@
 </form>
 
 <div class="table-responsive">
-    <table class="table table-striped align-middle">
+    <table class="table table-striped align-middle tabela-celular">
         <thead>
             <tr><th>#</th><th>Cliente</th><th>Quadra</th><th>Dia</th><th>Horário</th><th>Status</th><th>Pagamento</th><th></th></tr>
         </thead>
@@ -40,13 +40,13 @@
             @foreach (var a in Model)
             {
                 <tr>
-                    <td>@a.Id</td>
-                    <td>@a.Cliente</td>
-                    <td>@a.Quadra</td>
-                    <td>@a.Data.ToString("dd/MM/yyyy")</td>
-                    <td>@a.HoraInicio - @a.HoraFim</td>
-                    <td>@a.Status</td>
-                    <td>@a.StatusPagamento</td>
+                    <td data-label="#">@a.Id</td>
+                    <td data-label="Cliente">@a.Cliente</td>
+                    <td data-label="Quadra">@a.Quadra</td>
+                    <td data-label="Dia">@a.Data.ToString("dd/MM/yyyy")</td>
+                    <td data-label="Horário">@a.HoraInicio - @a.HoraFim</td>
+                    <td data-label="Status">@a.Status</td>
+                    <td data-label="Pagamento">@a.StatusPagamento</td>
                     <td class="text-end">
                         <form asp-action="ExcluirAgendamento" method="post" class="d-inline"
                               onsubmit="return confirm('Excluir este agendamento? Não dá para desfazer.');">

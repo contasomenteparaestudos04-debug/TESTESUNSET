@@ -23,15 +23,15 @@
 </form>
 
 <div class="table-responsive">
-    <table class="table table-striped align-middle">
+    <table class="table table-striped align-middle tabela-celular">
         <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th></th></tr></thead>
         <tbody>
             @foreach (var u in Model)
             {
                 <tr>
-                    <td>@u.NomeSobrenome</td>
-                    <td>@u.Email</td>
-                    <td>@u.Permissao</td>
+                    <td data-label="Nome">@u.NomeSobrenome</td>
+                    <td data-label="E-mail">@u.Email</td>
+                    <td data-label="Perfil">@u.Permissao</td>
                     <td class="text-end">
                         @if (u.Permissao != "Admin")
                         {

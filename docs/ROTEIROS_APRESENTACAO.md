@@ -125,7 +125,7 @@ Comandos para ter prontos antes de começar (Api na 5218, site na 5157): `dotnet
 4. *Como garantem que o gestor só baixa o relatório das quadras dele?* A rota `Relatorio` exige perfil Gestor ou Admin e usa o id de quem está logado (guardado no cookie) para buscar só as quadras dele; não existe parâmetro de quadra na URL para trocar.
 5. *Por que o relatório é TXT e não PDF?* O requisito RNF02 da documentação pede TXT; o "Exportar PDF" que aparece em um fluxo antigo não foi implementado e está registrado no resumo dos tópicos alterados.
 4. *O que é `ValidateAntiForgeryToken`?* Protege os formulários contra envio falso de outro site.
-5. *Como o site fica responsivo?* Grid e componentes do Bootstrap e a tag viewport no `_Layout`.
+5. *Como o site fica responsivo?* Grid e componentes do Bootstrap e a tag viewport no `_Layout`. As tabelas viram cartões no celular (menos de 768px) com um trecho de CSS em `site.css` e o atributo `data-label` em cada célula.
 
 **Transição:** "O mesmo Negócio também atende a API e o app, e fecha com o painel Admin. Patrick."
 

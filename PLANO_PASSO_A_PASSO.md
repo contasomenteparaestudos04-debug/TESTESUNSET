@@ -71,6 +71,7 @@ Regra de ouro do `CLAUDE.md`: se a documentação antiga e o código divergirem,
 - Pix simulado; reserva fica Pendente até pagar (5 minutos); paga vira "Em andamento"; "Finalizado" é calculado quando o horário acaba.
 - Sem Machine Learning (decisão do grupo); Flutter mínimo.
 - Horários fixos de 1 hora, 08h–22h, até 60 dias à frente.
+- Tabelas no celular (21/10/2026): o site rolava a tabela para o lado e escondia colunas e botões (Cancelar, Pagar com Pix, Excluir). Agora, abaixo de 768px, cada linha vira um cartão (classe `tabela-celular` + `data-label` nas células). Motivo: o manual pede telas responsivas e compatíveis com diferentes dispositivos (Etapa 5).
 - Chaves estrangeiras sem `ON DELETE CASCADE` (`NO ACTION`/Restrict). O EF gerava cascata e o SQL Server recusou (vários caminhos em cascata em `Agendamentos`). Corrigido em 17/10/2026 no `AppDbContext`, na migration, no snapshot e no `script_banco.sql` das 5 pastas. O código já tratava o erro ao excluir quadra/usuário com registros ligados.
 
 ## 4. Passo a passo de execução
